@@ -1,6 +1,6 @@
 {
   "name": "skill-audit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Autonomous agent + auditor for agent skills: discovers SKILL.md files, flags prompt-injection & secrets, scores them and publishes a leaderboard. Zero deps.",
   "bin": {
     "skill-audit": "bin/cli.js"

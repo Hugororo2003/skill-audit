@@ -17,9 +17,13 @@ Output in `public/`: per-skill HTML report cards (`public/cards/`) + `leaderboar
 
 Grades A ≥ 90 · B ≥ 75 · C ≥ 60 · D ≥ 45 · F below. Any critical finding caps the score at 25.
 
-## Run it yourself (CI / one-liner)
+## Run it yourself (CLI / CI)
 
-    npx skill-audit ./some-skill --out reports/
+    node bin/cli.js ./some-skill --out reports/
+
+Or run directly from GitHub without installing:
+
+    npx github:hugororo2003/skill-audit ./some-skill --out reports/
 
 Exit code 1 on critical findings — use it as a PR gate for your own skills repo.
 

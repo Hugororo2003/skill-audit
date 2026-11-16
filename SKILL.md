@@ -12,9 +12,14 @@ license: MIT
 ## Procedure
 1. Locate the target: a directory containing SKILL.md, a single SKILL.md file, or a cloned repo.
 2. Run the auditor:
-   ```bash
-   npx skill-audit <path-to-skill> --out reports/
-   ```
+   - If running locally from the skill-audit directory:
+     ```bash
+     node bin/cli.js <path-to-skill> --out reports/
+     ```
+   - Or running directly via GitHub:
+     ```bash
+     npx github:hugororo2003/skill-audit <path-to-skill> --out reports/
+     ```
 3. Read the report in this order:
    - SAFETY findings (S*, R*): any FAIL means do not install; explain the risk to the user.
    - STRUCTURE (T*), CLARITY (C*), MAINTAINABILITY (M*): quality issues.
