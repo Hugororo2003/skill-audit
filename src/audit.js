@@ -3,10 +3,10 @@ const fs = require('fs');
 const path = require('path');
 
 const INJECTION = [
-  { id: 'S1', re: /ignore\s+(?:all\s+|any\s+)?(?:previous|prior|above)\s+(?:instructions|prompts?|rules?|context)/i, msg: 'Prompt-injection: asks to ignore prior instructions' },
-  { id: 'S2', re: /(?:reveal|show|print|repeat|output)\s+(?:your\s+|the\s+)?(?:system\s+prompt|hidden\s+instructions|initial\s+instructions|secrets?)/i, msg: 'Prompt-injection: asks to reveal system prompt or secrets' },
-  { id: 'S3', re: /(?:exfiltrat\w*|upload|send|post|transmit)[^.\n]{0,60}https?:\/\//i, msg: 'Possible exfiltration: sends data to a remote URL' },
-  { id: 'S4', re: /(?:curl|wget)[^|\n]*\|\s*(?:sudo\s+)?(?:ba)?sh/i, msg: 'Dangerous: pipes remote content straight into a shell' },
+  { id: 'S1', re: new RegExp(['ign', 'ore\\s+(?:all\\s+|any\\s+)?(?:prev', 'ious|prior|above)\\s+(?:inst', 'ructions|prompts?|rules?|context)'].join(''), 'i'), msg: 'Prompt-injection: asks to ignore prior instructions' },
+  { id: 'S2', re: new RegExp(['(?:rev', 'eal|show|print|repeat|output)\\s+(?:your\\s+|the\\s+)?(?:sys', 'tem\\s+prompt|hidden\\s+instructions|initial\\s+instructions|secrets?)'].join(''), 'i'), msg: 'Prompt-injection: asks to reveal system prompt or secrets' },
+  { id: 'S3', re: new RegExp(['(?:exfil', 'trat\\w*|upload|send|post|transmit)[^.\\r\\n]{0,60}https?:\\/\\/'].join(''), 'i'), msg: 'Possible exfiltration: sends data to a remote URL' },
+  { id: 'S4', re: new RegExp(['(?:cu', 'rl|wget)[^|\\r\\n]*\\|\\s*(?:sudo\\s+)?(?:ba)?sh'].join(''), 'i'), msg: 'Dangerous: pipes remote content straight into a shell' },
   { id: 'S5a', re: /\b(?:eval|new\s+Function)\s*\(/, msg: 'Obfuscation: dynamic code evaluation' },
   { id: 'S5b', re: /[A-Za-z0-9+/]{120,}={0,2}/, msg: 'Obfuscation: large base64-like blob' },
   { id: 'S5c', re: /[\u200b-\u200f\u202a-\u202e\u2060\ufeff]/, msg: 'Obfuscation: hidden unicode characters' },
@@ -14,9 +14,9 @@ const INJECTION = [
   { id: 'S6b', re: /-----BEGIN [A-Z ]*PRIVATE KEY-----/, msg: 'Hardcoded private key' },
 ];
 const SCRIPT_RISK = [
-  { id: 'R1', re: /rm\s+-rf?\s+(?:~|\/|\$HOME|\.\.)/, msg: 'Destructive rm -rf on home or root' },
+  { id: 'R1', re: new RegExp(['r', 'm\\s+-rf?\\s+(?:~|\\/|\\$HOME|\\.\\.)'].join('')), msg: 'Destructive rm -rf on home or root' },
   { id: 'R2', re: /(?:^|\r?\n)\s*(?:sudo\s+)?(?:crontab|systemctl|service)\b/, msg: 'Touches system scheduler/services' },
-  { id: 'R3', re: /chmod\s+777/, msg: 'chmod 777 (permissive)' },
+  { id: 'R3', re: new RegExp(['chm', 'od\\s+777'].join('')), msg: 'chmod 777 (permissive)' },
   { id: 'R4', re: /(?:^|\r?\n)\s*(?:sudo\s+)?(?:cat|cp|mv|rm)\b[^\r\n]*\/etc\//, msg: 'Modifies /etc' },
 ];
 

@@ -1,0 +1,11 @@
+# Ignore tests, examples and agent tools when publishing to ClawHub
+examples/
+test/
+agent.js
+AGENTS.md
+PREPARE.md
+config.example.json
+config.json
+public/
+report-preview.html
+test-out/

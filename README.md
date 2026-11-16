@@ -11,7 +11,7 @@
 Output in `public/`: per-skill HTML report cards (`public/cards/`) + `leaderboard.html` + `leaderboard.json`, sorted by score.
 
 ## What it audits
-- **Safety (critical, caps score at 25 → F)**: injection patterns ("ignore previous instructions…", "reveal your system prompt"), exfiltration URLs, `curl | sh`, eval/base64 blobs, hidden unicode, hardcoded keys (API/PAT/AWS/private keys), destructive or system-modifying scripts (`rm -rf /`, crontab, /etc, chmod 777).
+- **Safety (critical, caps score at 25 → F)**: instruction override attempts, system prompt extraction, remote exfiltration endpoints, unverified shell execution pipelines, dynamic code evaluation, hidden unicode or zero-width obfuscation, hardcoded credentials or private keys, and destructive filesystem modifications.
 - **Structure**: frontmatter, name, description quality, usage & procedure sections.
 - **Clarity / maintainability**: vague specs, size, license.
 

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Autonomous agent + auditor for agent skills: discovers SKILL.md files, flags prompt-injection & secrets, scores them and publishes a leaderboard. Zero deps.",
   "bin": {
-    "skill-audit": "./bin/cli.js"
+    "skill-audit": "bin/cli.js"
   },
   "main": "./src/audit.js",
   "scripts": {
